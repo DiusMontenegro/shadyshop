@@ -3,31 +3,28 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { IoMenuOutline } from 'react-icons/io5';
 import { FaUserAlt } from 'react-icons/fa';
 import { TiShoppingCart } from 'react-icons/ti';
+import { NavLink } from 'react-router-dom';
 
 function Navbar() {
     return (
         <nav className="container mx-auto px-6 sm:px-8 lg:px-10 py-4">
             <div className="flex justify-between items-center">
                 <div>
-                    <a
-                        href="#"
+                    <NavLink
+                        to="/"
                         className="flex items-center gap-2 font-bold uppercase"
                     >
-                        <img
-                            src="./src/assets/logo.svg"
-                            alt="logo"
-                            width={32}
-                        />
+                        <img src="/logo.svg" alt="ShadyShop" width={32} />
                         <h1 className="hidden sm:block">Shady Shop</h1>
-                    </a>
+                    </NavLink>
                 </div>
                 <div className="font-bold gap-6 hidden md:flex">
-                    <a href="" className="flex items-center gap-1">
+                    <NavLink to="cart" className="flex items-center gap-1">
                         <TiShoppingCart className="text-lg" /> Cart
-                    </a>
-                    <a href="" className="flex items-center gap-1">
+                    </NavLink>
+                    <NavLink to="sign-up" className="flex items-center gap-1">
                         <FaUserAlt className="text-md" /> Sign Up
-                    </a>
+                    </NavLink>
                 </div>
                 <div className="md:hidden">
                     <Sheet>
@@ -39,23 +36,23 @@ function Navbar() {
                         <SheetContent side="left">
                             <ul className="flex flex-col gap-2 pt-4 font-semibold">
                                 <li className="mb-2">
-                                    <a
-                                        href="#"
+                                    <NavLink
+                                        to="/"
                                         className="flex items-center gap-3 font-bold uppercase"
                                     >
                                         <img
-                                            src="./src/assets/logo.svg"
+                                            src="/logo.svg"
                                             alt="logo"
                                             width={32}
                                         />
                                         <h1>Shady Shop</h1>
-                                    </a>
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <a href="">Cart</a>
+                                    <NavLink to="cart">Cart</NavLink>
                                 </li>
                                 <li>
-                                    <a href="">Sign In</a>
+                                    <NavLink to="sign-up">Sign Up</NavLink>
                                 </li>
                             </ul>
                         </SheetContent>
