@@ -2,12 +2,12 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
 function Rating({ value, text, className }) {
     return (
-        <div
+        <span
             className={`${
                 className ? className : ''
             } flex items-center gap-2 text-yellow-400`}
         >
-            <div className="flex">
+            <span className="flex">
                 <span>
                     {value >= 1 ? (
                         <FaStar />
@@ -53,9 +53,9 @@ function Rating({ value, text, className }) {
                         <FaRegStar />
                     )}
                 </span>
-            </div>
+            </span>
             <span className="text-[#1c1c1c]">{text ? text : ''}</span>
-        </div>
+        </span>
     );
 }
 

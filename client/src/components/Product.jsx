@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-
 import {
     Card,
     CardContent,
@@ -31,7 +30,7 @@ function Product({ product }) {
                         value={product.rating}
                         text={`${product.numReviews} ratings`}
                     />
-                    <p>${product.price}</p>
+                    ${product.price}
                 </CardDescription>
             </CardContent>
         </Card>

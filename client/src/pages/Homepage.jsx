@@ -1,9 +1,28 @@
+import { useEffect, useState } from 'react';
+
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import Product from '@/components/Product';
-import products from '@/products';
+import axios from 'axios';
 
 function Homepage() {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        async function getProducts() {
+            try {
+                const { data } = await axios.get(
+                    'http://localhost:8000/api/products'
+                );
+                setProducts(data);
+            } catch (error) {
+                console.error('Error fetching products from backend', error);
+            }
+        }
+
+        getProducts();
+    }, []);
+
     return (
         <>
             <Navbar />

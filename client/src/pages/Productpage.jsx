@@ -1,17 +1,33 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
-import products from '@/products';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Rating from '@/components/Rating';
 import { Card } from '@/components/ui/card';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Productpage = () => {
-    const { id: productId } = useParams();
+    const [product, setProduct] = useState({});
+
+    const { id } = useParams();
     const navigate = useNavigate();
-    const product = products.find((p) => p._id === productId);
-    console.log(product);
+
+    useEffect(() => {
+        async function getProduct() {
+            try {
+                const { data } = await axios.get(
+                    `http://localhost:8000/api/products/${id}`
+                );
+                setProduct(data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        getProduct();
+    }, [id]);
 
     return (
         <>
