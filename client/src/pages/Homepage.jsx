@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import Product from '@/components/Product';
 import products from '@/products';
@@ -22,6 +23,8 @@ function Homepage() {
                     ))}
                 </ul>
             </main>
+
+            <Footer />
         </>
     );
 }
