@@ -1,22 +1,31 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
+import { useState } from 'react';
 import { useGetProductDetailsQuery } from '@/slices/productsApiSlice';
+import { addToCart } from '@/slices/cartSlice';
+import { useDispatch } from 'react-redux';
 
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Rating from '@/components/Rating';
-import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import Loader from '@/components/ui/loader';
 import AlertMessage from '@/components/AlertMessage';
 
 const Productpage = () => {
     const { id: productId } = useParams();
+    const [qty, setQty] = useState(1);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const {
         data: product,
         isLoading,
         isError,
     } = useGetProductDetailsQuery(productId);
-    const navigate = useNavigate();
+
+    function handleAddToCart() {
+        dispatch(addToCart({ ...product, qty }));
+        navigate('/cart');
+    }
 
     return (
         <>
@@ -73,14 +82,14 @@ const Productpage = () => {
                             </div>
 
                             <div className="lg:col-span-3 p-4">
-                                <Card className="border-none shadow-none">
+                                <div className="border-none shadow-none">
                                     <div className="flex text-lg justify-between items-center w-full p-3 border-2 rounded-md mb-1">
                                         <span className="text-sm">Price:</span>
                                         <span className="font-semibold">
                                             ${product.price}
                                         </span>
                                     </div>
-                                    <div className="flex text-lg justify-between items-center w-full p-3 border-2 rounded-md">
+                                    <div className="flex text-lg justify-between items-center w-full p-3 border-2 rounded-md mb-1">
                                         <span className="text-sm">Status:</span>
                                         <span className="text-sm font-semibold">
                                             {product.countInStock > 0
@@ -88,14 +97,48 @@ const Productpage = () => {
                                                 : 'Out of Stock'}
                                         </span>
                                     </div>
+
+                                    {product.countInStock > 0 && (
+                                        <label
+                                            htmlFor="quantity"
+                                            className="flex justify-between text-sm items-center p-3 border-2 rounded-md"
+                                        >
+                                            <span>Quantity:</span>
+                                            <select
+                                                id="quantity"
+                                                value={qty}
+                                                onChange={(e) =>
+                                                    setQty(
+                                                        Number(e.target.value)
+                                                    )
+                                                }
+                                                className="w-[20%]"
+                                            >
+                                                {[
+                                                    ...Array(
+                                                        product.countInStock
+                                                    ).keys(),
+                                                ].map((x) => (
+                                                    <option
+                                                        key={x + 1}
+                                                        value={x + 1}
+                                                    >
+                                                        {x + 1}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </label>
+                                    )}
+
                                     <Button
                                         variant="secondary"
                                         className="text-sm w-[85px] p-1 mt-4 border"
                                         disabled={!product.countInStock}
+                                        onClick={handleAddToCart}
                                     >
                                         Add to Cart
                                     </Button>
-                                </Card>
+                                </div>
                             </div>
                         </section>
                     </div>
