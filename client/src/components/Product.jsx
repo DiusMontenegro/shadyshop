@@ -19,7 +19,7 @@ function Product({ product }) {
                     />
                 </Link>
 
-                <Link to={`product/${product.name}`}>
+                <Link to={`product/${product._id}`}>
                     <CardTitle className="text-md h-[2.5em] text-nowrap text-ellipsis overflow-hidden">
                         {product.name}
                     </CardTitle>
