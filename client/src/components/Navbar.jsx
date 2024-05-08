@@ -4,8 +4,12 @@ import { IoMenuOutline } from 'react-icons/io5';
 import { FaUserAlt } from 'react-icons/fa';
 import { TiShoppingCart } from 'react-icons/ti';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Badge } from './ui/badge';
 
 function Navbar() {
+    const { cartItems } = useSelector((state) => state.cart);
+
     return (
         <nav className="container mx-auto px-6 sm:px-8 lg:px-10 py-4">
             <div className="flex justify-between items-center">
@@ -19,10 +23,15 @@ function Navbar() {
                     </NavLink>
                 </div>
                 <div className="font-bold gap-6 hidden md:flex">
-                    <NavLink to="cart" className="flex items-center gap-1">
+                    <NavLink to="/cart" className="flex items-center gap-1">
                         <TiShoppingCart className="text-lg" /> Cart
+                        {cartItems.length > 0 && (
+                            <Badge className="rounded-full flex justify-center items-center text-[10px] h-4 p-[4px] text-center">
+                                {cartItems.length}
+                            </Badge>
+                        )}
                     </NavLink>
-                    <NavLink to="sign-up" className="flex items-center gap-1">
+                    <NavLink to="/sign-up" className="flex items-center gap-1">
                         <FaUserAlt className="text-md" /> Sign Up
                     </NavLink>
                 </div>
@@ -49,10 +58,10 @@ function Navbar() {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="cart">Cart</NavLink>
+                                    <NavLink to="/cart">Cart</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="sign-up">Sign Up</NavLink>
+                                    <NavLink to="/sign-up">Sign Up</NavLink>
                                 </li>
                             </ul>
                         </SheetContent>
