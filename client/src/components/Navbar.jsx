@@ -7,8 +7,21 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Badge } from './ui/badge';
 
+import {
+    Menubar,
+    MenubarContent,
+    MenubarItem,
+    MenubarMenu,
+    MenubarTrigger,
+} from '@/components/ui/menubar';
+
 function Navbar() {
     const { cartItems } = useSelector((state) => state.cart);
+    const { userInfo } = useSelector((state) => state.auth);
+
+    function logoutHandler() {
+        alert('Logged Out');
+    }
 
     return (
         <nav className="container mx-auto px-6 sm:px-8 lg:px-10 py-4">
@@ -31,9 +44,30 @@ function Navbar() {
                             </Badge>
                         )}
                     </NavLink>
-                    <NavLink to="/login" className="flex items-center gap-1">
-                        <FaUserAlt className="text-md" /> Sign In
-                    </NavLink>
+                    {userInfo ? (
+                        <Menubar className="border-none">
+                            <MenubarMenu>
+                                <MenubarTrigger className="cursor-pointer">
+                                    {userInfo.name}
+                                </MenubarTrigger>
+                                <MenubarContent>
+                                    <MenubarItem>
+                                        <NavLink to="/profile">Profile</NavLink>
+                                    </MenubarItem>
+                                    <MenubarItem onClick={logoutHandler}>
+                                        Log out
+                                    </MenubarItem>
+                                </MenubarContent>
+                            </MenubarMenu>
+                        </Menubar>
+                    ) : (
+                        <NavLink
+                            to="/login"
+                            className="flex items-center gap-1"
+                        >
+                            <FaUserAlt className="text-md" /> Sign In
+                        </NavLink>
+                    )}
                 </div>
                 <div className="md:hidden">
                     <Sheet>
@@ -60,9 +94,18 @@ function Navbar() {
                                 <li>
                                     <NavLink to="/cart">Cart</NavLink>
                                 </li>
-                                <li>
-                                    <NavLink to="/login">Sign in</NavLink>
-                                </li>
+                                {userInfo ? (
+                                    <>
+                                        <NavLink to="/profile">Profile</NavLink>
+                                        <span onClick={logoutHandler}>
+                                            Log out
+                                        </span>
+                                    </>
+                                ) : (
+                                    <li>
+                                        <NavLink to="/login">Sign in</NavLink>
+                                    </li>
+                                )}
                             </ul>
                         </SheetContent>
                     </Sheet>
