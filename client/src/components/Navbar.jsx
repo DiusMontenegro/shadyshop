@@ -31,8 +31,8 @@ function Navbar() {
                             </Badge>
                         )}
                     </NavLink>
-                    <NavLink to="/sign-up" className="flex items-center gap-1">
-                        <FaUserAlt className="text-md" /> Sign Up
+                    <NavLink to="/login" className="flex items-center gap-1">
+                        <FaUserAlt className="text-md" /> Sign In
                     </NavLink>
                 </div>
                 <div className="md:hidden">
@@ -61,7 +61,7 @@ function Navbar() {
                                     <NavLink to="/cart">Cart</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/sign-up">Sign Up</NavLink>
+                                    <NavLink to="/login">Sign in</NavLink>
                                 </li>
                             </ul>
                         </SheetContent>
