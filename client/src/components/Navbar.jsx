@@ -3,9 +3,11 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { IoMenuOutline } from 'react-icons/io5';
 import { FaUserAlt } from 'react-icons/fa';
 import { TiShoppingCart } from 'react-icons/ti';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { Badge } from './ui/badge';
+import { useLogoutMutation } from '@/slices/usersApiSlice';
+import { logout } from '@/slices/authSlice';
 
 import {
     Menubar,
@@ -19,8 +21,19 @@ function Navbar() {
     const { cartItems } = useSelector((state) => state.cart);
     const { userInfo } = useSelector((state) => state.auth);
 
-    function logoutHandler() {
-        alert('Logged Out');
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const [logoutApiCall] = useLogoutMutation();
+
+    async function logoutHandler() {
+        try {
+            await logoutApiCall().unwrap();
+            dispatch(logout());
+            navigate('/login');
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -51,9 +64,10 @@ function Navbar() {
                                     {userInfo.name}
                                 </MenubarTrigger>
                                 <MenubarContent>
-                                    <MenubarItem>
-                                        <NavLink to="/profile">Profile</NavLink>
-                                    </MenubarItem>
+                                    <NavLink to="/profile">
+                                        <MenubarItem>Profile</MenubarItem>
+                                    </NavLink>
+
                                     <MenubarItem onClick={logoutHandler}>
                                         Log out
                                     </MenubarItem>
