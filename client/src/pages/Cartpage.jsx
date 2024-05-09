@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { AiTwotoneDelete } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { addToCart } from '@/slices/cartSlice';
+import { addToCart, removeFromCart } from '@/slices/cartSlice';
 
 function Cartpage() {
     const navigate = useNavigate();
@@ -17,13 +17,21 @@ function Cartpage() {
         dispatch(addToCart({ ...product, qty }));
     }
 
+    async function removeFromCartHandler(id) {
+        dispatch(removeFromCart(id));
+    }
+
+    function checkoutHandler() {
+        navigate('/login?redirect=/shipping');
+    }
+
     return (
         <>
             <Navbar />
             <main className="container grid lg:grid-cols-12 justify-center">
                 {cartItems.length === 0 ? (
-                    <>
-                        <h1 className="mb-[20px] text-2xl font-semibold">
+                    <div className="flex flex-col ">
+                        <h1 className="mb-[20px] text-2xl font-semibold w-[200px]">
                             Shopping Cart
                         </h1>
                         <div className="bg-sky-200 rounded-md p-1 lg:w-[500px] flex flex-col items-center justify-center">
@@ -34,7 +42,7 @@ function Cartpage() {
                                 Go back
                             </Link>
                         </div>
-                    </>
+                    </div>
                 ) : (
                     <>
                         <div className="lg:col-span-8">
@@ -87,7 +95,9 @@ function Cartpage() {
                                         </select>
                                         <Button
                                             className="p-2"
-                                            disabled={cartItems.length === 0}
+                                            onClick={() =>
+                                                removeFromCartHandler(item._id)
+                                            }
                                         >
                                             <AiTwotoneDelete width={50} />
                                         </Button>
@@ -115,7 +125,12 @@ function Cartpage() {
                                         )
                                         .toFixed(2)}
                                 </p>
-                                <Button>Proceed to checkout</Button>
+                                <Button
+                                    disabled={cartItems.length === 0}
+                                    onClick={checkoutHandler}
+                                >
+                                    Proceed to checkout
+                                </Button>
                             </div>
                         </div>
                     </>
