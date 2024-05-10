@@ -6,6 +6,7 @@ import { saveShippingAddress } from '@/slices/cartSlice';
 import FormContainer from '@/components/FormContainer';
 import Navbar from '@/components/Navbar';
 import { Button, Input } from '@nextui-org/react';
+import CheckoutSteps from '@/components/CheckoutSteps';
 
 const Shippingpage = () => {
     const cart = useSelector((state) => state.cart);
@@ -33,6 +34,7 @@ const Shippingpage = () => {
             <Navbar />
 
             <FormContainer>
+                <CheckoutSteps step1 step2 />
                 <h1 className="text-2xl font-semibold mb-4">
                     Shipping Address
                 </h1>
@@ -71,7 +73,7 @@ const Shippingpage = () => {
                             onChange={(e) => setCountry(e.target.value)}
                         />
                         <Button
-                            className="text-md"
+                            className="text-md font-semibold"
                             variant="bordered"
                             color="success"
                             type="submit"
