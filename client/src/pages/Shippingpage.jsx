@@ -41,6 +41,7 @@ const Shippingpage = () => {
                 <form onSubmit={submitHandler} className="my-2 flex flex-col">
                     <div className="flex flex-col w-full flex-wrap md:flex-nowrap gap-4">
                         <Input
+                            isRequired
                             type="text"
                             label="Address"
                             size="sm"
@@ -49,6 +50,7 @@ const Shippingpage = () => {
                             onChange={(e) => setAddress(e.target.value)}
                         />
                         <Input
+                            isRequired
                             type="text"
                             label="City"
                             size="sm"
@@ -57,6 +59,7 @@ const Shippingpage = () => {
                             onChange={(e) => setCity(e.target.value)}
                         />
                         <Input
+                            isRequired
                             type="text"
                             label="Postal Code"
                             size="sm"
@@ -65,6 +68,7 @@ const Shippingpage = () => {
                             onChange={(e) => setPostalCode(e.target.value)}
                         />
                         <Input
+                            isRequired
                             type="text"
                             label="Country"
                             size="sm"

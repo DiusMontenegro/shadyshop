@@ -9,6 +9,7 @@ import Loginpage from './pages/Loginpage';
 import Registerpage from './pages/Registerpage';
 import Shippingpage from './pages/Shippingpage';
 import ProtectedRoutes from './components/ProtectedRoutes';
+import Paymentpage from './pages/Paymentpage';
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                             path="shipping"
                             element={<Shippingpage />}
                         ></Route>
+                        <Route path="payment" element={<Paymentpage />}></Route>
                     </Route>
                 </Routes>
             </BrowserRouter>
