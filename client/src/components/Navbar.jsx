@@ -45,7 +45,7 @@ function Navbar() {
                         className="flex items-center gap-2 font-bold uppercase"
                     >
                         <img src="/logo.svg" alt="ShadyShop" width={32} />
-                        <h1 className="hidden sm:block">Shady Shop</h1>
+                        <h1 className="hidden md:block">Shady Shop</h1>
                     </NavLink>
                 </div>
                 <div className="font-bold gap-6 hidden md:flex">

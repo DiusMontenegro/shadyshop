@@ -10,6 +10,7 @@ import Registerpage from './pages/Registerpage';
 import Shippingpage from './pages/Shippingpage';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import Paymentpage from './pages/Paymentpage';
+import PlaceOrderpage from './pages/PlaceOrderpage';
 
 function App() {
     return (
@@ -29,6 +30,10 @@ function App() {
                             element={<Shippingpage />}
                         ></Route>
                         <Route path="payment" element={<Paymentpage />}></Route>
+                        <Route
+                            path="placeorder"
+                            element={<PlaceOrderpage />}
+                        ></Route>
                     </Route>
                 </Routes>
             </BrowserRouter>

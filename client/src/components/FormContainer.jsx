@@ -1,6 +1,6 @@
-function FormContainer({ children }) {
+function FormContainer({ children, className }) {
     return (
-        <div className="container pt-6">
+        <div className={`${className} container pt-2`}>
             <div className="flex justify-center gap-2">
                 <div className="w-[350px]">{children}</div>
             </div>
