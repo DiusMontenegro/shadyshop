@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './assets/styles/bootstrap.custom.css';
 import './assets/styles/index.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import { lazy, Suspense } from 'react';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {
@@ -14,24 +14,30 @@ import {
 import { HelmetProvider } from 'react-helmet-async';
 import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
-import HomeScreen from './screens/HomeScreen';
-import ProductScreen from './screens/ProductScreen';
-import CartScreen from './screens/CartScreen';
-import LoginScreen from './screens/LoginScreen';
-import RegisterScreen from './screens/RegisterScreen';
-import ShippingScreen from './screens/ShippingScreen';
-import PaymentScreen from './screens/PaymentScreen';
-import PlaceOrderScreen from './screens/PlaceOrderScreen';
-import OrderScreen from './screens/OrderScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import OrderListScreen from './screens/admin/OrderListScreen';
-import ProductListScreen from './screens/admin/ProductListScreen';
-import ProductEditScreen from './screens/admin/ProductEditScreen';
-import UserListScreen from './screens/admin/UserListScreen';
-import UserEditScreen from './screens/admin/UserEditScreen';
 import store from './store';
 import { Provider } from 'react-redux';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import Loader from './components/Loader';
+
+const HomeScreen = lazy(() => import('./screens/HomeScreen'));
+const ProductScreen = lazy(() => import('./screens/ProductScreen'));
+const CartScreen = lazy(() => import('./screens/CartScreen'));
+const LoginScreen = lazy(() => import('./screens/LoginScreen'));
+const RegisterScreen = lazy(() => import('./screens/RegisterScreen'));
+const ShippingScreen = lazy(() => import('./screens/ShippingScreen'));
+const PaymentScreen = lazy(() => import('./screens/PaymentScreen'));
+const PlaceOrderScreen = lazy(() => import('./screens/PlaceOrderScreen'));
+const OrderScreen = lazy(() => import('./screens/OrderScreen'));
+const ProfileScreen = lazy(() => import('./screens/ProfileScreen'));
+const OrderListScreen = lazy(() => import('./screens/admin/OrderListScreen'));
+const ProductListScreen = lazy(() =>
+  import('./screens/admin/ProductListScreen')
+);
+const ProductEditScreen = lazy(() =>
+  import('./screens/admin/ProductEditScreen')
+);
+const UserListScreen = lazy(() => import('./screens/admin/UserListScreen'));
+const UserEditScreen = lazy(() => import('./screens/admin/UserEditScreen'));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -77,7 +83,9 @@ root.render(
     <HelmetProvider>
       <Provider store={store}>
         <PayPalScriptProvider deferLoading={true}>
-          <RouterProvider router={router} />
+          <Suspense fallback={<Loader />}>
+            <RouterProvider router={router} />
+          </Suspense>
         </PayPalScriptProvider>
       </Provider>
     </HelmetProvider>
