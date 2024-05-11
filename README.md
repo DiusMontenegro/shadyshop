@@ -1,4 +1,4 @@
-# Shady Shop (MERN) Ecommerce App
+# Shady Shop (MERN) E-commerce App
 
 ## Technologies Used
 
