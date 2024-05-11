@@ -36,7 +36,9 @@
 
 ## Video Demonstration
 
-[![Shady Shop Video Demonstration](./public/ShadyShop.png)](https://youtu.be/al8bGhoxZIE)
+<a href="https://youtu.be/al8bGhoxZIE">
+    <img src="./frontend/public/ShadyShop.png" alt="Shady Shop Video Demonstration">
+</a>
 
 ## License
 
